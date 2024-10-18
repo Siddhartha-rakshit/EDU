@@ -73,62 +73,59 @@ const LoginPage = () => {
         </div>
         <div className="lg:w-1/2 bg-white p-8 flex items-center justify-center">
           <div className="w-full max-w-md">
-            <div className="flex justify-between mb-8">
-              <button
-                className={`flex-1 py-2 px-4 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                  selectedRole === "Mentor"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-gray-700"
-                }`}
-                onClick={() => handleRoleSelect("Mentor")}
-              >
-                <FaChalkboardTeacher className="inline mr-2" />
-                Mentor
-              </button>
-              <button
-                className={`flex-1 mx-2 py-2 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                  selectedRole === "User"
-                    ? "bg-green-600 text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
-                onClick={() => handleRoleSelect("User")}
-              >
-                <FaUserGraduate className="inline mr-2" />
-                User
-              </button>
-              <button
-                className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                  selectedRole === "Evaluator"
-                    ? "bg-purple-600 text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
-                onClick={() => handleRoleSelect("Evaluator")}
-              >
-                <FaClipboardCheck className="inline mr-2" />
-                Evaluator
-              </button>
-            </div>
-            {selectedRole && (
+            <div className="relative mb-8">
+              <div className="flex bg-gray-200 rounded-t-lg overflow-hidden">
+                <button
+                  className={`flex-1 py-2 font-semibold transition-all duration-300 relative z-10 ${
+                    selectedRole === "Mentor"
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-700 hover:bg-blue-200"
+                  }`}
+                  onClick={() => handleRoleSelect("Mentor")}
+                >
+                  <FaChalkboardTeacher className="inline mr-2" />
+                  Mentor
+                </button>
+                <button
+                  className={`flex-1 py-2 font-semibold transition-all duration-300 relative z-10 ${
+                    selectedRole === "User"
+                      ? "bg-green-600 text-white"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`}
+                  onClick={() => handleRoleSelect("User")}
+                >
+                  <FaUserGraduate className="inline mr-2" />
+                  User
+                </button>
+                <button
+                  className={`flex-1 py-2 font-semibold transition-all duration-300 relative z-10 ${
+                    selectedRole === "Evaluator"
+                      ? "bg-purple-600 text-white"
+                      : "text-gray-700 hover:bg-purple-200"
+                  }`}
+                  onClick={() => handleRoleSelect("Evaluator")}
+                >
+                  <FaClipboardCheck className="inline mr-2" />
+                  Evaluator
+                </button>
+              </div>
               <div
-                className={`h-1 bg-${
+                className={`absolute bottom-0 left-0 h-full transition-all duration-300 rounded-b-lg ${
                   selectedRole === "Mentor"
-                    ? "blue"
+                    ? "bg-blue-600"
                     : selectedRole === "User"
-                    ? "green"
-                    : "purple"
-                }-600 rounded-full transition-all duration-500 ease-in-out`}
+                    ? "bg-green-600"
+                    : "bg-purple-600"
+                }`}
                 style={{
                   width: "33.33%",
-                  transform: `translateX(${
-                    selectedRole === "Mentor"
-                      ? "0%"
-                      : selectedRole === "User"
-                      ? "100%"
-                      : "200%"
-                  })`,
+                  transform: selectedRole === "Mentor" ? "translateX(0%)" : selectedRole === "User" ? "translateX(100%)" : "translateX(200%)",
+                  zIndex: 0,
+                  borderTopLeftRadius: "0.5rem", // Keep rounded corners at the top
+                  borderTopRightRadius: "0.5rem",
                 }}
-              ></div>
-            )}
+              />
+            </div>
             <form onSubmit={handleSubmit}>
               <div className="mb-6">
                 <label
